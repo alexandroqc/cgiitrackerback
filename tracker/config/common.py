@@ -24,6 +24,7 @@ class Common(Configuration):
 
         # Your apps
         'tracker.users',
+        'apps.pages'
 
     )
 
@@ -56,6 +57,18 @@ class Common(Configuration):
             default='postgres://postgres:@postgres:5432/postgres',
             conn_max_age=int(os.getenv('POSTGRES_CONN_MAX_AGE', 600))
         )
+    }
+
+    #Redis
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": "redis://redis:@redis:6379/1",
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient"
+            },
+            "KEY_PREFIX": "webpage"
+        }
     }
 
     # General
