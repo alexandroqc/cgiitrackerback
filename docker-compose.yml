@@ -19,6 +19,10 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+  redis:
+    image: redislabs/rejson
+    ports:
+      - "6379:6379"
   documentation:
     restart: always
     build: ./
