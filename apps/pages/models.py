@@ -17,19 +17,20 @@ class Applications(models.Model):
             'confidence': self.confidence,
             'version': self.version,
             'website': self.web_site,
-            'webpage': self.web_page
         }
 
 
-class WebPage(models.Model):
-    urls = models.CharField(max_length=255, primary_key=True)
-    applications = models.OneToOneField(Applications, on_delete=models.CASCADE)
+class SiteUrl(models.Model):
+    scheme = models.CharField(max_length=15)
+    netloc = models.CharField(max_length=150)
+    path = models.CharField(max_length=200, blank=True)
+    # applications = models.OneToOneField(Applications, on_delete=models.CASCADE)
 
     def __unicode__(self):
-        return self.urls
+        return self.netloc
 
     def to_json(self):
         return {
-            'urls': self.urls,
-            'applications': self.applications
+            'scheme': self.scheme,
+            # 'applications': self.applications
         }

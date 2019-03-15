@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.pages.models import WebPage, Applications
+from apps.pages.models import SiteUrl, Applications
 
-admin.site.register(WebPage)
+admin.site.register(SiteUrl)
 admin.site.register(Applications)

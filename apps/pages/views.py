@@ -2,7 +2,7 @@ import redis
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import WebPage
+from .models import SiteUrl
 from django.http import JsonResponse
 import json
 
@@ -18,7 +18,7 @@ def page_detail(request, pk):
             return Response(status=status.HTTP_404_NOT_FOUND)
         data = json.loads(myurl)
 
-    except WebPage.DoesNotExist:
+    except SiteUrl.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
