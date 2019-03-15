@@ -1,3 +1,5 @@
 from django.contrib import admin
+from apps.pages.models import WebPage, Applications
 
-# Register your models here.
+admin.site.register(WebPage)
+admin.site.register(Applications)
