@@ -1,9 +1,13 @@
 from rest_framework import serializers
-from .models import WebPage
+from .models import SiteUrl
 
 
-class PagesSerializer(serializers.Serializer):
-    url = serializers.URLField()
+class SiteUrlSerializer(serializers.ModelSerializer):
 
-    def create(self, validated_data):
-        return WebPage.objects.create(**validated_data)
+    # def create(self, validated_data):
+    #     site_url = serializers.HyperlinkedModelSerializer
+
+    class Meta:
+        model = SiteUrl
+        fields = ('id', 'scheme', 'netloc', 'path')
+        # read_only_fields = ('auth_token',)
