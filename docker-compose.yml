@@ -7,6 +7,8 @@ services:
     restart: always
     environment:
       - DJANGO_SECRET_KEY=local
+    networks:
+      - cgii-net
     image: web
     build: ./
     command: >
@@ -23,6 +25,12 @@ services:
     image: redislabs/rejson
     ports:
       - "6379:6379"
+  wappalyzer:
+    image: alexandroqc/cgii-wapp
+    networks:
+      - cgii-net
+    ports:
+      - "3000:3001"
   documentation:
     restart: always
     build: ./
@@ -31,3 +39,7 @@ services:
       - ./:/code
     ports:
       - "8001:8001"
+
+networks:
+  cgii-net:
+    driver: bridge
