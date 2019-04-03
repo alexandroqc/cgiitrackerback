@@ -3,6 +3,8 @@ version: '2'
 services:
   postgres:
     image: postgres:9.6
+    networks:
+      - cgii-net
   web:
     restart: always
     environment:
@@ -23,6 +25,8 @@ services:
       - postgres
   redis:
     image: redislabs/rejson
+    networks:
+      - cgii-net
     ports:
       - "6379:6379"
   wappalyzer:
