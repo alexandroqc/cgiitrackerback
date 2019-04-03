@@ -8,7 +8,7 @@ from .serializers import SiteUrlSerializer
 from django.http import JsonResponse
 import json
 import coreapi
-from urllib.parse import quote_plus
+from urllib.parse import quote_plus, urlunparse
 
 pool = redis.ConnectionPool(host='redis', port=6379, db=0)
 r = redis.Redis(connection_pool=pool)
@@ -23,13 +23,14 @@ class SiteUrlViewSet(ModelViewSet):
 @api_view(['GET'])
 def page_detail(request, pk):
     try:
-        myurl = r.execute_command('JSON.GET', str(pk))
+        uri_encoded = quote_plus(str(pk))
+        myurl = r.execute_command('JSON.GET', uri_encoded)
         if myurl is None:
-            schema = client.get('http://wappalyzer:3000/api/v1/wapp/'+quote_plus(str(pk)))
+            schema = client.get('http://wappalyzer:3000/api/v1/wapp/'+uri_encoded)
             if schema is None:
                 return Response(status=status.HTTP_404_NOT_FOUND)
             else:
-                r.execute_command('JSON.SET', str(pk), '.', json.dumps(json.loads(schema)))
+                r.execute_command('JSON.SET', uri_encoded, '.', json.dumps(json.loads(schema)))
                 data = json.loads(schema)
         else:
             data = json.loads(myurl)
