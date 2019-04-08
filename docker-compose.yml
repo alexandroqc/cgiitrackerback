@@ -33,8 +33,6 @@ services:
     image: alexandroqc/cgii-wapp
     networks:
       - cgii-net
-    ports:
-      - "3000:3001"
   documentation:
     restart: always
     build: ./
