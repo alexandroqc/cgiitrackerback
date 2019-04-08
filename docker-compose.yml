@@ -3,10 +3,14 @@ version: '2'
 services:
   postgres:
     image: postgres:9.6
+    networks:
+      - cgii-net
   web:
     restart: always
     environment:
       - DJANGO_SECRET_KEY=local
+    networks:
+      - cgii-net
     image: web
     build: ./
     command: >
@@ -21,8 +25,14 @@ services:
       - postgres
   redis:
     image: redislabs/rejson
+    networks:
+      - cgii-net
     ports:
       - "6379:6379"
+  wappalyzer:
+    image: alexandroqc/cgii-wapp
+    networks:
+      - cgii-net
   documentation:
     restart: always
     build: ./
@@ -31,3 +41,7 @@ services:
       - ./:/code
     ports:
       - "8001:8001"
+
+networks:
+  cgii-net:
+    driver: bridge

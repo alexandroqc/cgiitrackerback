@@ -10,6 +10,7 @@ router.register(r'urlinfo', SiteUrlViewSet)
 urlpatterns = [
     re_path(r'^search/(?P<pk>.*)/$', page_detail),
     re_path(r'^urlsite/(?P<pk>.*)/$', page_detail),
+    # re_path(r'^urlsitecache/(?P<schema>.*)/(?P<netloc>.*)/(?P<pathname>.*)$', page_detail_cache),
 ]
 
 urlpatterns += router.urls
