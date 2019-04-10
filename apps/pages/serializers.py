@@ -24,3 +24,9 @@ class SiteUrlSerializer(serializers.ModelSerializer):
         model = SiteUrl
         fields = ('id', 'scheme', 'netloc', 'path', 'uri', 'applications')
         # read_only_fields = ('auth_token',)
+
+
+class SiteURLShortListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SiteUrl
+        fields = ('id', 'scheme', 'netloc', 'path', 'uri')

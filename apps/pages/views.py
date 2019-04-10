@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import SiteUrl
-from .serializers import SiteUrlSerializer
+from .serializers import SiteUrlSerializer, SiteURLShortListSerializer
 from django.http import JsonResponse
 import json
 import coreapi
@@ -40,3 +40,9 @@ def page_detail(request, pk):
 
     if request.method == 'GET':
         return JsonResponse(data, status=status.HTTP_200_OK)
+
+
+class SiteShortURLListViewSet(ModelViewSet):
+    queryset = SiteUrl.objects.all()
+    serializer_class = SiteURLShortListSerializer
+
