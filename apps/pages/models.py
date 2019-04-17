@@ -15,11 +15,11 @@ class Categories(models.Model):
 
 
 class Applications(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     confidence = models.PositiveSmallIntegerField(null=True)
     version = models.CharField(max_length=100, blank=True, null=True)
-    icon = models.CharField(max_length=100, blank=True)
-    web_site = models.CharField(max_length=300, blank=True)
+    icon = models.CharField(max_length=100, blank=True, null=True)
+    web_site = models.CharField(max_length=300, blank=True, null=True)
     categories = models.ManyToManyField(Categories)
 
     def __str__(self):

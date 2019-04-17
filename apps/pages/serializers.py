@@ -12,8 +12,7 @@ class ApplicationsSerializer(serializers.ModelSerializer):
     categories = CategoriesSerializer(many=True, required=False)
 
     def save(self, **kwargs):
-        print(kwargs, "*********************")
-        return super(ApplicationsSerializer,self).save(**kwargs)
+        return super(ApplicationsSerializer, self).save(**kwargs)
 
     class Meta:
         model = Applications
